@@ -1,7 +1,7 @@
 from selenium import webdriver
 # from selenium.webdriver.common.keys import Keys
 
-# When Chromedriver crashed when importing Selenium, the solution's given below
+# When Chromedriver crashed while importing Selenium, the solution's given below
 
 from selenium.webdriver.chrome.options import Options
 
