@@ -1,27 +1,29 @@
-import requests
+from selenium import webdriver
+# from selenium.webdriver.common.keys import Keys
 
-YT_TRENDING_URL = "https://www.youtube.com/feed/trending"
+# When Chromedriver crashed when importing Selenium, the solution's given below
 
-response = requests.get(YT_TRENDING_URL)
+from selenium.webdriver.chrome.options import Options
 
-print('Status Code:', response.status_code)
-"""
+def get_driver():
 
-print('Output:', response.text[:1000])
+  #Initializing options for chromedriver
+  chrome_options = Options()
+  chrome_options.add_argument('--no-sandbox')
+  chrome_options.add_argument('--disable-dev-shm-usage')
+  
+  #Configuring Chromedriver
+  gchrome_driver = webdriver.Chrome(options=chrome_options)
+  return gchrome_driver
 
-with open('trending.html', 'w') as f:
-  f.write(response.text)
+if __name__ == '__main__':
+  
+  YT_TRENDING_URL = "https://www.youtube.com/feed/trending"
 
-"""
+  print("Creating Chrome Driver")
+  driver = get_driver()
 
-from bs4 import BeautifulSoup
+  print("Fetching Page")
+  driver.get(YT_TRENDING_URL)
 
-doc = BeautifulSoup(response.text, 'html.parser')
-
-
-print('Page Title:', doc.title.text)
-
-
-video_divs = doc.find_all('ytd-video-renderer')
-
-print(f'Found {len(video_divs)} videos')
+  print('Page Title: ', driver.title)

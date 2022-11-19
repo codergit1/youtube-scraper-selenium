@@ -1,5 +1,9 @@
 { pkgs }: {
   deps = [
+    pkgs.python38Packages.pwntools
+    pkgs.chromedriver
+    pkgs.chromium
+    pkgs.chromedriver
     pkgs.python38Full
   ];
   env = {
