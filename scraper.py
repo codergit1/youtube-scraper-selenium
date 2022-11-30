@@ -22,17 +22,63 @@ def get_driver():
 
 
 def get_videos(driver):
-  YT_TRENDING_URL = "https://www.youtube.com/feed/trending"
+  # YT_TRENDING_URL = "https://www.youtube.com/feed/trending"
+
+  YT_TRENDING_URL = "https://www.youtube.com/feed/trending?bp=6gQJRkVleHBsb3Jl"
 
   VIDEO_DIV_TAG = 'ytd-video-renderer'
 
   driver.get(YT_TRENDING_URL)
-  driver.implicitly_wait(21.4)
+  #driver.implicitly_wait(100)
   
   print('Getting video div tags')
   vid_tag = driver.find_elements(By.TAG_NAME, VIDEO_DIV_TAG)
 
   return vid_tag
+
+
+
+def parse_video(video):
+  vid = video
+  title_tag = vid.find_element(By.ID, 'video-title')
+
+  # print(f'Title: {(title_tag)}')
+
+  # Found title by searching with 'video-title', but since it's an object therefore use .text to show title in     text
+  
+  title = title_tag.text
+
+  #EXTRA NOTE: Use 'find_element' not 'find_elements'
+
+  #Title & Url
+  url = title_tag.get_attribute('href')
+  print('Title: ', title)
+  print('URL: ', url)
+
+  #thumbnail & thumbnail_url
+  thumbnail_tag = vid.find_element(By.TAG_NAME, 'img')
+
+  thumbnail_url = thumbnail_tag.get_attribute('src')
+
+  print('Thumbnail URL: ', thumbnail_url)
+
+  #Channel
+  channel = vid.find_element(By.CLASS_NAME, 'ytd-channel-name')
+  channel_name = channel.text
+  print('Channel: ', channel_name)
+
+  #Description
+  description = vid.find_element(By.ID, 'description-text').text
+  print('Description: ', description)
+
+  return {
+    'Title': title,
+    'url': url,
+    'Thumbnail url': thumbnail_url,
+    'Channel': channel_name,
+    'Description': description
+  }
+
 
 if __name__ == '__main__':
 
@@ -48,19 +94,8 @@ if __name__ == '__main__':
   print(f'Found {len(video)} video div tags')  #can be printed
 
   #Title, url, thumbnail_url, channel, views, uploaded, description
-  print('Parsing the first video')
+  print('Parsing Top 10 videos')
+  vid_data = [parse_video(v) for v in video[:]]
+  print(vid_data)
 
-  vid = video[0]
-  title_tag = vid.find_element(By.ID, 'video-title')
-
-    # print(f'Title: {(title_tag)}')
-
-# Found title by searching with 'video-title' but it's an object therefore use .text
   
-  title = title_tag.text
-
-  #EXTRA NOTE: Use 'find_element' not 'find_elements'
-
-  url = title_tag.get_attribute('href')
-  print('Title: ', title)
-  print('URL: ', url)
