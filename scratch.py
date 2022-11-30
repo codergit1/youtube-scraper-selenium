@@ -2,6 +2,7 @@ import requests
 
 YT_TRENDING_URL = "https://www.youtube.com/feed/trending"
 
+""" Selenium web driver is not used here """
 response = requests.get(YT_TRENDING_URL)
 
 print('Status Code:', response.status_code)
