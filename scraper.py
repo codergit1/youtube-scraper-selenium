@@ -85,63 +85,26 @@ def parse_video(video):
     'Description': description
   }
 
-
-def send_email():
-
-  try:
-    server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-    server.ehlo()
-
-    gmail_user = 'soundarya.sejong@gmail.com'
-    gmail_password = os.environ['gmail_password']
-    receiver_user = 'soundarya.sejong@gmail.com'
-
-    subject = 'From Replit'
-    body = 'Hey, Orion?'
-
-    email_text = f"""\
-    From: {gmail_user}
-    To: {receiver_user}
-    Subject: {subject}
-    
-    {body}
-    """
-
-    server.login(gmail_user, gmail_password)
-
-    server.sendmail(gmail_user, receiver_user, email_text)
-
-    server.close()
-
-    print('Email sent!')
-
-  except:
-    print('Something went wrong. Additionally Google depricated third-party apps or devices accessibility')
-
-
 if __name__ == '__main__':
 
-  # print("Creating Chrome Driver")
-  # driver = get_driver()
+  print("Creating Chrome Driver")
+  driver = get_driver()
 
-  # print("Fetching Page")
-  # video = get_videos(driver)
+  print("Fetching Page")
+  video = get_videos(driver)
 
-  # print('Page Title: ', driver.title)
-  # # driver.quit() when used it found 1 video div tag
+  print('Page Title: ', driver.title)
+  # driver.quit() when used it found 1 video div tag
 
-  # print(f'Found {len(video)} video div tags')  #can be printed
+  print(f'Found {len(video)} video div tags')  #can be printed
 
-  # #Title, url, thumbnail_url, channel, views, uploaded, description
-  # print('Parsing Top 10 videos')
-  # vid_data = [parse_video(v) for v in video[:]]
-  # print(vid_data)
+  #Title, url, thumbnail_url, channel, views, uploaded, description
+  print('Parsing Top 10 videos')
+  vid_data = [parse_video(v) for v in video[:]]
+  print(vid_data)
 
-  # #PLEASE NOTE: Webdriver loaded fast and exited
-  # print('Save data to CSV')
-  # videos_df = pd.DataFrame(vid_data)
-  # print(videos_df)
-  # videos_df.to_csv('trending_new.csv', index = None)
-
-  print('send an email with results')
-  send_email()
+  #PLEASE NOTE: Webdriver loaded fast and exited
+  print('Save data to CSV')
+  videos_df = pd.DataFrame(vid_data)
+  print(videos_df)
+  videos_df.to_csv('trending_new.csv', index = None)
