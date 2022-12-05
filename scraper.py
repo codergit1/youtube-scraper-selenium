@@ -98,4 +98,4 @@ if __name__ == '__main__':
   print('Save data to CSV')
   videos_df = pd.DataFrame(vid_data)
   print(videos_df)
-  videos_df.to_csv('trending_new.csv', index = None)
+  videos_df.to_csv('trending.csv', index = None)
