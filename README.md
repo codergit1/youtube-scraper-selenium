@@ -1,6 +1,6 @@
 # youtube-scraper-selenium
 
-셀레니윰과 AWS 램다를 활용하여 유투브에 스크랩한다. 스크랩한 내용을 excel file을 참고해주시기 바랍니다.
+셀레니윰과 AWS 램다를 활용하여 유투브에 스크랩한다. 스크랩한 내용을 <a href = 'https://github.com/codergit1/youtube-scraper-selenium/blob/main/trending.csv'>csv </a> 참고해주시기 바랍니다.
 
 Scrape Trending videos on YouTube using Selenium and AWS Lambda
 
