@@ -71,7 +71,7 @@ def parse_video(video):
     'Title': title,
     'Url': url,
     'Thumbnail url': thumbnail_url,
-    'Channel': channel_name,
+    'Channel': channel.text,
     'Description': description
   }
 
